@@ -1,0 +1,208 @@
+//1. Count digits in a number
+import java.util.Scanner;
+
+public class CountDigits {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        int count = 0;
+        int temp = Math.abs(number); // to handle negative numbers
+
+        if (temp == 0) {
+            count = 1;
+        } else {
+            while (temp > 0) {
+                temp = temp / 10;
+                count++;
+            }
+        }
+
+        System.out.println("Number of digits: " + count);
+    }
+}
+//Output:
+Enter a number: 4521
+Number of digits: 4
+
+//2.Check if a number is palindrome
+import java.util.Scanner;
+
+public class PalindromeNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int original = scanner.nextInt();
+        int num = original;
+        int reversed = 0;
+
+        while (num != 0) {
+            int digit = num % 10;
+            reversed = reversed * 10 + digit;
+            num /= 10;
+        }
+
+        if (original == reversed) {
+            System.out.println(original + " is a Palindrome.");
+        } else {
+            System.out.println(original + " is not a Palindrome.");
+        }
+    }
+}
+//Output:
+Enter a number: 121
+121 is a Palindrome.
+Enter a number: 123
+123 is not a Palindrome.
+
+//3.Print Fibonacci series up to N terms
+import java.util.Scanner;
+
+public class FibonacciSeries {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number of terms: ");
+        int n = scanner.nextInt();
+
+        int first = 0, second = 1;
+
+        System.out.print("Fibonacci Series up to " + n + " terms: ");
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print(first + " ");
+
+            int next = first + second;
+            first = second;
+            second = next;
+        }
+    }
+}
+//Output:
+Enter number of terms: 8
+Fibonacci Series up to 8 terms: 0 1 1 2 3 5 8 13
+
+//4.Find sum of digits of a number
+import java.util.Scanner;
+
+public class SumOfDigits {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        int sum = 0;
+        int originalNumber = number;
+
+        while (number != 0) {
+            int digit = number % 10; // get the last digit
+            sum += digit;            // add to sum
+            number /= 10;            // remove last digit
+        }
+
+        System.out.println("Sum of digits of " + originalNumber + " is: " + sum);
+    }
+}
+//Output:
+Enter a number: 1234
+Sum of digits of 1234 is: 10
+
+//5.Find GCD of two numbers using loop
+import java.util.Scanner;
+
+public class GCDLoop {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        int a = scanner.nextInt();
+
+        System.out.print("Enter second number: ");
+        int b = scanner.nextInt();
+
+        int gcd = 1;
+
+        // Find the minimum of a and b
+        int min = Math.min(a, b);
+
+        // Loop from 1 to min and find the highest number that divides both
+        for (int i = 1; i <= min; i++) {
+            if (a % i == 0 && b % i == 0) {
+                gcd = i;
+            }
+        }
+
+        System.out.println("GCD of " + a + " and " + b + " is: " + gcd);
+    }
+}
+//Output:
+Enter first number: 24
+Enter second number: 36
+GCD of 24 and 36 is: 12
+
+//6.Check if a number is prime
+import java.util.Scanner;
+
+public class PrimeCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int num = scanner.nextInt();
+
+        boolean isPrime = true;
+
+        if (num <= 1) {
+            isPrime = false;
+        } else {
+            // Only check up to sqrt(num)
+            for (int i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+
+        if (isPrime) {
+            System.out.println(num + " is a Prime Number.");
+        } else {
+            System.out.println(num + " is Not a Prime Number.");
+        }
+    }
+}
+//Output:
+Enter a number: 7
+7 is a Prime Number.
+Enter a number: 10
+10 is Not a Prime Number.
+
+//7.Reverse a number
+import java.util.Scanner;
+
+public class ReverseNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int num = scanner.nextInt();
+        int reversed = 0;
+
+        while (num != 0) {
+            int digit = num % 10;       // Get last digit
+            reversed = reversed * 10 + digit;  // Append digit
+            num /= 10;                  // Remove last digit
+        }
+
+        System.out.println("Reversed number: " + reversed);
+    }
+}
+//Output:
+Enter a number: 1234
+Reversed number: 4321
+
+
