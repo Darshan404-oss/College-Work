@@ -1,0 +1,108 @@
+/*1. Given a string s, find the first non-repeating character and return its index. If it doesn't exist, return -1.
+Input - "loveleetcode" Output - 2*/
+
+import java.util.*;
+
+public class FirstUniqueChar {
+    public static int firstUniqChar(String s) {
+        int[] count = new int[26];
+
+        for (char c : s.toCharArray()) {
+            count[c - 'a']++;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            if (count[s.charAt(i) - 'a'] == 1)
+                return i;
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        String input = "loveleetcode";
+        int index = firstUniqChar(input);
+        System.out.println("Output: " + index);
+    }
+}
+//Output:
+2
+
+/*2. Implement a basic string compression using the counts of repeated characters. Only return the compressed string if it’s shorter than the original.
+Input- "aabcccccaaa" Output- "a2b1c5a3"*/
+
+public class StringCompression {
+    public static String compress(String s) {
+        StringBuilder compressed = new StringBuilder();
+        int count = 1;
+
+        for (int i = 1; i <= s.length(); i++) {
+            if (i < s.length() && s.charAt(i) == s.charAt(i - 1)) {
+                count++;
+            } else {
+                compressed.append(s.charAt(i - 1)).append(count);
+                count = 1;
+            }
+        }
+
+        return compressed.length() < s.length() ? compressed.toString() : s;
+    }
+
+    public static void main(String[] args) {
+        String input = "aabcccccaaa";
+        String result = compress(input);
+        System.out.println("Output: " + result);
+    }
+}
+//Output:
+a2b1c5a3
+
+/*3. Check if a given string can be formed by repeating a substring multiple times.
+Input- "abab" Output- true*/
+
+public class RepeatedSubstring {
+    public static boolean repeatedSubstringPattern(String s) {
+        String doubled = s + s;
+        return doubled.substring(1, doubled.length() - 1).contains(s);
+    }
+
+    public static void main(String[] args) {
+        String input = "abab";
+        boolean result = repeatedSubstringPattern(input);
+        System.out.println("Output: " + result);
+    }
+}
+//Output:
+true
+
+/*4.Given a string, return all characters that appear more than once.
+Input- "programming" Output- ['r', 'g', 'm']*/
+
+import java.util.*;
+
+public class DuplicateCharacters {
+    public static List<Character> findDuplicates(String s) {
+        Map<Character, Integer> freq = new HashMap<>();
+        List<Character> duplicates = new ArrayList<>();
+
+        for (char c : s.toCharArray()) {
+            freq.put(c, freq.getOrDefault(c, 0) + 1);
+        }
+
+        for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
+            if (entry.getValue() > 1) {
+                duplicates.add(entry.getKey());
+            }
+        }
+
+        return duplicates;
+    }
+
+    public static void main(String[] args) {
+        String input = "programming";
+        List<Character> result = findDuplicates(input);
+        System.out.println("Output: " + result);
+    }
+}
+//Output:
+[r, g, m]
