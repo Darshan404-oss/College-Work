@@ -1,1 +1,127 @@
+//Write a Java program to implement Stack using Array.
+
+import java.util.Scanner;
+
+public class StackArray {
+
+    int[] stack;
+    int top;
+    int size;
+
+    StackArray(int n) {
+        size = n;
+        stack = new int[size];
+        top = -1;
+    }
+
+    // push element into stack
+    void push(int item) {
+
+        if (top == size - 1) {
+            System.out.println("Stack Overflow");
+            return;
+        }
+
+        stack[++top] = item;
+        System.out.println("Pushed: " + item);
+    }
+
+    // pop element from stack
+    void pop() {
+
+        if (top == -1) {
+            System.out.println("Stack Underflow");
+            return;
+        }
+
+        int item = stack[top--];
+        System.out.println("Popped: " + item);
+    }
+
+    // display stack elements
+    void display() {
+
+        if (top == -1) {
+            System.out.println("Stack is empty");
+            return;
+        }
+
+        System.out.print("Stack elements: ");
+        for (int i = top; i >= 0; i--) {
+            System.out.print(stack[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter size of stack: ");
+        int n = sc.nextInt();
+
+        StackArray s = new StackArray(n);
+
+        int choice, item;
+
+        do {
+            System.out.println("\n1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Display");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter element: ");
+                    item = sc.nextInt();
+                    s.push(item);
+                    break;
+
+                case 2:
+                    s.pop();
+                    break;
+
+                case 3:
+                    s.display();
+                    break;
+
+                case 4:
+                    System.out.println("Exit");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter size of stack: 5
+
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter choice: 1
+Enter element: 10
+Pushed: 10
+
+Enter choice: 1
+Enter element: 20
+Pushed: 20
+
+Enter choice: 3
+Stack elements: 20 10
+
+Enter choice: 2
+Popped: 20
+
+Enter choice: 3
+Stack elements: 10
 
