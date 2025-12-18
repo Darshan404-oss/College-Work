@@ -1,1 +1,94 @@
+//Write a Java program to convert an Infix expression into Postfix expression using Stack.
+
+import java.util.Scanner;
+
+public class InfixToPostfix {
+
+    char[] stack;
+    int top = -1;
+
+    InfixToPostfix(int size) {
+        stack = new char[size];
+    }
+
+    void push(char ch) {
+        stack[++top] = ch;
+    }
+
+    char pop() {
+        return stack[top--];
+    }
+
+    char peek() {
+        return stack[top];
+    }
+
+    boolean isEmpty() {
+        return top == -1;
+    }
+
+    // function to check precedence
+    int precedence(char ch) {
+        if (ch == '+' || ch == '-')
+            return 1;
+        else if (ch == '*' || ch == '/')
+            return 2;
+        else
+            return 0;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter infix expression: ");
+        String infix = sc.next();
+
+        InfixToPostfix obj = new InfixToPostfix(infix.length());
+
+        String postfix = "";
+
+        for (int i = 0; i < infix.length(); i++) {
+
+            char ch = infix.charAt(i);
+
+            // if operand, add to postfix
+            if (Character.isLetterOrDigit(ch)) {
+                postfix = postfix + ch;
+            }
+            // if '(' push to stack
+            else if (ch == '(') {
+                obj.push(ch);
+            }
+            // if ')' pop until '('
+            else if (ch == ')') {
+                while (!obj.isEmpty() && obj.peek() != '(') {
+                    postfix = postfix + obj.pop();
+                }
+                obj.pop(); // remove '('
+            }
+            // if operator
+            else {
+                while (!obj.isEmpty() &&
+                        obj.precedence(ch) <= obj.precedence(obj.peek())) {
+                    postfix = postfix + obj.pop();
+                }
+                obj.push(ch);
+            }
+        }
+
+        // pop remaining operators
+        while (!obj.isEmpty()) {
+            postfix = postfix + obj.pop();
+        }
+
+        System.out.println("Postfix expression: " + postfix);
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter infix expression: A+B*C
+Postfix expression: ABC*+
 
