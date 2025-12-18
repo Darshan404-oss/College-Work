@@ -1,1 +1,138 @@
+//Write a Java program to implement Binary Search Tree (BST) and perform basic operation
+
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class BinarySearchTree {
+
+    Node root = null;
+
+    // insert node in BST
+    Node insert(Node root, int item) {
+
+        if (root == null) {
+            return new Node(item);
+        }
+
+        if (item < root.data) {
+            root.left = insert(root.left, item);
+        } else if (item > root.data) {
+            root.right = insert(root.right, item);
+        }
+
+        return root;
+    }
+
+    // inorder traversal
+    void inorder(Node root) {
+
+        if (root != null) {
+            inorder(root.left);
+            System.out.print(root.data + " ");
+            inorder(root.right);
+        }
+    }
+
+    // search element
+    boolean search(Node root, int key) {
+
+        if (root == null) {
+            return false;
+        }
+
+        if (root.data == key) {
+            return true;
+        } else if (key < root.data) {
+            return search(root.left, key);
+        } else {
+            return search(root.right, key);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        BinarySearchTree bst = new BinarySearchTree();
+
+        int choice, item;
+
+        do {
+            System.out.println("\n1. Insert");
+            System.out.println("2. Inorder Traversal");
+            System.out.println("3. Search");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter element: ");
+                    item = sc.nextInt();
+                    bst.root = bst.insert(bst.root, item);
+                    break;
+
+                case 2:
+                    System.out.print("Inorder Traversal: ");
+                    bst.inorder(bst.root);
+                    System.out.println();
+                    break;
+
+                case 3:
+                    System.out.print("Enter element to search: ");
+                    item = sc.nextInt();
+                    if (bst.search(bst.root, item))
+                        System.out.println("Element found");
+                    else
+                        System.out.println("Element not found");
+                    break;
+
+                case 4:
+                    System.out.println("Exit");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+
+//Output:
+1. Insert
+2. Inorder Traversal
+3. Search
+4. Exit
+Enter choice: 1
+Enter element: 50
+
+Enter choice: 1
+Enter element: 30
+
+Enter choice: 1
+Enter element: 70
+
+Enter choice: 1
+Enter element: 20
+
+Enter choice: 1
+Enter element: 40
+
+Enter choice: 2
+Inorder Traversal: 20 30 40 50 70
+
+Enter choice: 3
+Enter element to search: 40
+Element found
 
