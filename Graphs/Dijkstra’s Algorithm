@@ -1,1 +1,88 @@
+//Write a Java program to find the shortest path from a source vertex using Dijkstra’s Algorithm.
+
+import java.util.Scanner;
+
+public class Dijkstra {
+
+    static final int INF = 999;
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n;
+
+        System.out.print("Enter number of vertices: ");
+        n = sc.nextInt();
+
+        int[][] cost = new int[n][n];
+
+        System.out.println("Enter cost adjacency matrix (enter 999 for no edge):");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cost[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.print("Enter source vertex: ");
+        int source = sc.nextInt();
+
+        int[] distance = new int[n];
+        int[] visited = new int[n];
+
+        // initialize distances
+        for (int i = 0; i < n; i++) {
+            distance[i] = cost[source][i];
+            visited[i] = 0;
+        }
+
+        visited[source] = 1;
+        distance[source] = 0;
+
+        for (int count = 1; count < n; count++) {
+
+            int min = INF;
+            int u = -1;
+
+            // find minimum distance vertex
+            for (int i = 0; i < n; i++) {
+                if (visited[i] == 0 && distance[i] < min) {
+                    min = distance[i];
+                    u = i;
+                }
+            }
+
+            visited[u] = 1;
+
+            // update distances
+            for (int i = 0; i < n; i++) {
+                if (visited[i] == 0 &&
+                        distance[u] + cost[u][i] < distance[i]) {
+                    distance[i] = distance[u] + cost[u][i];
+                }
+            }
+        }
+
+        System.out.println("Shortest distance from source " + source + ":");
+        for (int i = 0; i < n; i++) {
+            System.out.println("To vertex " + i + " = " + distance[i]);
+        }
+
+        sc.close();
+    }
+}
+//Output:
+Enter number of vertices: 4
+Enter cost adjacency matrix (enter 999 for no edge):
+0 2 999 6
+2 0 3 8
+999 3 0 1
+6 8 1 0
+Enter source vertex: 0
+
+Shortest distance from source 0:
+To vertex 0 = 0
+To vertex 1 = 2
+To vertex 2 = 5
+To vertex 3 = 6
 
