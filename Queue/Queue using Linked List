@@ -1,1 +1,136 @@
+//Write a Java program to implement Queue using Linked List.
+
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class QueueLinkedList {
+
+    Node front = null;
+    Node rear = null;
+
+    // insert element into queue
+    void enqueue(int item) {
+
+        Node newNode = new Node(item);
+
+        if (rear == null) {
+            front = rear = newNode;
+            System.out.println("Inserted: " + item);
+            return;
+        }
+
+        rear.next = newNode;
+        rear = newNode;
+        System.out.println("Inserted: " + item);
+    }
+
+    // delete element from queue
+    void dequeue() {
+
+        if (front == null) {
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        int item = front.data;
+        front = front.next;
+
+        if (front == null) {
+            rear = null;
+        }
+
+        System.out.println("Deleted: " + item);
+    }
+
+    // display queue elements
+    void display() {
+
+        if (front == null) {
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        System.out.print("Queue elements: ");
+        Node temp = front;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        QueueLinkedList q = new QueueLinkedList();
+
+        int choice, item;
+
+        do {
+            System.out.println("\n1. Enqueue");
+            System.out.println("2. Dequeue");
+            System.out.println("3. Display");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter element: ");
+                    item = sc.nextInt();
+                    q.enqueue(item);
+                    break;
+
+                case 2:
+                    q.dequeue();
+                    break;
+
+                case 3:
+                    q.display();
+                    break;
+
+                case 4:
+                    System.out.println("Exit");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+
+//Output:
+1. Enqueue
+2. Dequeue
+3. Display
+4. Exit
+Enter choice: 1
+Enter element: 10
+Inserted: 10
+
+Enter choice: 1
+Enter element: 20
+Inserted: 20
+
+Enter choice: 3
+Queue elements: 10 20
+
+Enter choice: 2
+Deleted: 10
+
+Enter choice: 3
+Queue elements: 20
 
