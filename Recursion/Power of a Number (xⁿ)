@@ -1,1 +1,41 @@
+//Write a Java program to find the power of a number (xⁿ) using recursion.
+
+import java.util.Scanner;
+
+public class Power {
+
+    // recursive function to find power
+    static int power(int x, int n) {
+
+        if (n == 0) {
+            return 1;
+        } else {
+            return x * power(x, n - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int x, n;
+
+        System.out.print("Enter base value: ");
+        x = sc.nextInt();
+
+        System.out.print("Enter exponent value: ");
+        n = sc.nextInt();
+
+        int result = power(x, n);
+
+        System.out.println("Result: " + result);
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter base value: 2
+Enter exponent value: 5
+Result: 32
 
