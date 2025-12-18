@@ -1,1 +1,144 @@
+//Write a Java program to implement Circular Linked List and perform basic operations.
 
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class CircularLinkedList {
+
+    Node last = null;
+
+    // insert at end
+    void insert(int item) {
+
+        Node newNode = new Node(item);
+
+        if (last == null) {
+            last = newNode;
+            newNode.next = last;
+            System.out.println("Inserted: " + item);
+            return;
+        }
+
+        newNode.next = last.next;
+        last.next = newNode;
+        last = newNode;
+
+        System.out.println("Inserted: " + item);
+    }
+
+    // delete from beginning
+    void delete() {
+
+        if (last == null) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        Node temp = last.next;
+
+        if (last.next == last) {
+            System.out.println("Deleted: " + temp.data);
+            last = null;
+            return;
+        }
+
+        last.next = temp.next;
+        System.out.println("Deleted: " + temp.data);
+    }
+
+    // display list
+    void display() {
+
+        if (last == null) {
+            System.out.println("List is empty");
+            return;
+        }
+
+        Node temp = last.next;
+        System.out.print("Circular Linked List: ");
+
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != last.next);
+
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        CircularLinkedList cll = new CircularLinkedList();
+
+        int choice, item;
+
+        do {
+            System.out.println("\n1. Insert");
+            System.out.println("2. Delete");
+            System.out.println("3. Display");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter element: ");
+                    item = sc.nextInt();
+                    cll.insert(item);
+                    break;
+
+                case 2:
+                    cll.delete();
+                    break;
+
+                case 3:
+                    cll.display();
+                    break;
+
+                case 4:
+                    System.out.println("Exit");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+//Output:
+1. Insert
+2. Delete
+3. Display
+4. Exit
+Enter choice: 1
+Enter element: 10
+Inserted: 10
+
+Enter choice: 1
+Enter element: 20
+Inserted: 20
+
+Enter choice: 1
+Enter element: 30
+Inserted: 30
+
+Enter choice: 3
+Circular Linked List: 10 20 30
+
+Enter choice: 2
+Deleted: 10
+
+Enter choice: 3
+Circular Linked List: 20 30
