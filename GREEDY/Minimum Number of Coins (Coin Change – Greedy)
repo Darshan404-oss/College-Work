@@ -1,1 +1,63 @@
+//Write a Java program to find the minimum number of coins required for a given amount using Greedy method.
+
+import java.util.Scanner;
+
+public class CoinChange {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n, amount;
+
+        System.out.print("Enter number of coin denominations: ");
+        n = sc.nextInt();
+
+        int[] coins = new int[n];
+
+        System.out.println("Enter coin denominations:");
+        for (int i = 0; i < n; i++) {
+            coins[i] = sc.nextInt();
+        }
+
+        System.out.print("Enter amount: ");
+        amount = sc.nextInt();
+
+        // sort coins in descending order (simple way)
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (coins[i] < coins[j]) {
+                    int temp = coins[i];
+                    coins[i] = coins[j];
+                    coins[j] = temp;
+                }
+            }
+        }
+
+        System.out.println("Coins used:");
+
+        int count = 0;
+
+        for (int i = 0; i < n; i++) {
+            while (amount >= coins[i]) {
+                amount = amount - coins[i];
+                System.out.print(coins[i] + " ");
+                count++;
+            }
+        }
+
+        System.out.println("\nTotal number of coins: " + count);
+
+        sc.close();
+    }
+}
+//Output:
+Enter number of coin denominations: 4
+Enter coin denominations:
+1 2 5 10
+Enter amount: 28
+
+Coins used:
+10 10 5 2 1 
+Total number of coins: 5
 
