@@ -1,1 +1,148 @@
+//Write a Java program to implement Circular Queue using array.
+
+import java.util.Scanner;
+
+public class CircularQueue {
+
+    int[] queue;
+    int front, rear, size;
+
+    CircularQueue(int n) {
+        size = n;
+        queue = new int[size];
+        front = -1;
+        rear = -1;
+    }
+
+    // insert element
+    void enqueue(int item) {
+
+        if ((rear + 1) % size == front) {
+            System.out.println("Queue is full");
+            return;
+        }
+
+        if (front == -1) {
+            front = 0;
+        }
+
+        rear = (rear + 1) % size;
+        queue[rear] = item;
+        System.out.println("Inserted: " + item);
+    }
+
+    // delete element
+    void dequeue() {
+
+        if (front == -1) {
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        int item = queue[front];
+
+        if (front == rear) {
+            front = -1;
+            rear = -1;
+        } else {
+            front = (front + 1) % size;
+        }
+
+        System.out.println("Deleted: " + item);
+    }
+
+    // display queue
+    void display() {
+
+        if (front == -1) {
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        System.out.print("Queue elements: ");
+        int i = front;
+        while (true) {
+            System.out.print(queue[i] + " ");
+            if (i == rear)
+                break;
+            i = (i + 1) % size;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int choice, item;
+
+        System.out.print("Enter size of queue: ");
+        int n = sc.nextInt();
+
+        CircularQueue cq = new CircularQueue(n);
+
+        do {
+            System.out.println("\n1. Enqueue");
+            System.out.println("2. Dequeue");
+            System.out.println("3. Display");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter element: ");
+                    item = sc.nextInt();
+                    cq.enqueue(item);
+                    break;
+
+                case 2:
+                    cq.dequeue();
+                    break;
+
+                case 3:
+                    cq.display();
+                    break;
+
+                case 4:
+                    System.out.println("Exit");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter size of queue: 5
+
+1. Enqueue
+2. Dequeue
+3. Display
+4. Exit
+Enter choice: 1
+Enter element: 10
+Inserted: 10
+
+Enter choice: 1
+Enter element: 20
+Inserted: 20
+
+Enter choice: 1
+Enter element: 30
+Inserted: 30
+
+Enter choice: 3
+Queue elements: 10 20 30
+
+Enter choice: 2
+Deleted: 10
+
+Enter choice: 3
+Queue elements: 20 30
 
