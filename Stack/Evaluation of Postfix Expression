@@ -1,1 +1,71 @@
+//. Write a Java program to evaluate a Postfix expression using Stack.
+
+import java.util.Scanner;
+
+public class PostfixEvaluation {
+
+    int[] stack;
+    int top = -1;
+
+    PostfixEvaluation(int size) {
+        stack = new int[size];
+    }
+
+    void push(int value) {
+        stack[++top] = value;
+    }
+
+    int pop() {
+        return stack[top--];
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter postfix expression: ");
+        String exp = sc.next();
+
+        PostfixEvaluation pe = new PostfixEvaluation(exp.length());
+
+        for (int i = 0; i < exp.length(); i++) {
+
+            char ch = exp.charAt(i);
+
+            // if operand, push into stack
+            if (Character.isDigit(ch)) {
+                pe.push(ch - '0');
+            } else {
+                int b = pe.pop();
+                int a = pe.pop();
+                int result = 0;
+
+                switch (ch) {
+                    case '+':
+                        result = a + b;
+                        break;
+                    case '-':
+                        result = a - b;
+                        break;
+                    case '*':
+                        result = a * b;
+                        break;
+                    case '/':
+                        result = a / b;
+                        break;
+                }
+
+                pe.push(result);
+            }
+        }
+
+        System.out.println("Result: " + pe.pop());
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter postfix expression: 23*54*+9-
+Result: 17
 
