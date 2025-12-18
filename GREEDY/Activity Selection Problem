@@ -1,1 +1,74 @@
+//Write a Java program to solve the Activity Selection Problem using Greedy method.
+
+import java.util.Scanner;
+
+public class ActivitySelection {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n;
+
+        System.out.print("Enter number of activities: ");
+        n = sc.nextInt();
+
+        int[] start = new int[n];
+        int[] finish = new int[n];
+
+        System.out.println("Enter start times:");
+        for (int i = 0; i < n; i++) {
+            start[i] = sc.nextInt();
+        }
+
+        System.out.println("Enter finish times:");
+        for (int i = 0; i < n; i++) {
+            finish[i] = sc.nextInt();
+        }
+
+        // sorting activities based on finish time
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (finish[i] > finish[j]) {
+                    int temp = finish[i];
+                    finish[i] = finish[j];
+                    finish[j] = temp;
+
+                    temp = start[i];
+                    start[i] = start[j];
+                    start[j] = temp;
+                }
+            }
+        }
+
+        System.out.println("Selected activities:");
+
+        int i = 0;
+        System.out.println("Activity with start time " + start[i] +
+                           " and finish time " + finish[i]);
+
+        for (int j = 1; j < n; j++) {
+            if (start[j] >= finish[i]) {
+                System.out.println("Activity with start time " + start[j] +
+                                   " and finish time " + finish[j]);
+                i = j;
+            }
+        }
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter number of activities: 6
+Enter start times:
+1 3 0 5 8 5
+Enter finish times:
+2 4 6 7 9 9
+
+Selected activities:
+Activity with start time 1 and finish time 2
+Activity with start time 3 and finish time 4
+Activity with start time 5 and finish time 7
+Activity with start time 8 and finish time 9
 
