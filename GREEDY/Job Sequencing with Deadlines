@@ -1,1 +1,97 @@
+//Write a Java program to solve the Job Sequencing with Deadlines problem using Greedy method.
+
+import java.util.Scanner;
+
+class Job {
+    char id;
+    int deadline;
+    int profit;
+}
+
+public class JobSequencing {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n;
+
+        System.out.print("Enter number of jobs: ");
+        n = sc.nextInt();
+
+        Job[] jobs = new Job[n];
+
+        for (int i = 0; i < n; i++) {
+            jobs[i] = new Job();
+            System.out.print("Enter job id: ");
+            jobs[i].id = sc.next().charAt(0);
+            System.out.print("Enter deadline: ");
+            jobs[i].deadline = sc.nextInt();
+            System.out.print("Enter profit: ");
+            jobs[i].profit = sc.nextInt();
+        }
+
+        // sort jobs by profit in descending order
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (jobs[i].profit < jobs[j].profit) {
+                    Job temp = jobs[i];
+                    jobs[i] = jobs[j];
+                    jobs[j] = temp;
+                }
+            }
+        }
+
+        int maxDeadline = 0;
+        for (int i = 0; i < n; i++) {
+            if (jobs[i].deadline > maxDeadline) {
+                maxDeadline = jobs[i].deadline;
+            }
+        }
+
+        char[] result = new char[maxDeadline];
+        boolean[] slot = new boolean[maxDeadline];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = jobs[i].deadline - 1; j >= 0; j--) {
+                if (!slot[j]) {
+                    slot[j] = true;
+                    result[j] = jobs[i].id;
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Selected jobs sequence:");
+        for (int i = 0; i < maxDeadline; i++) {
+            if (slot[i]) {
+                System.out.print(result[i] + " ");
+            }
+        }
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter number of jobs: 5
+Enter job id: a
+Enter deadline: 2
+Enter profit: 100
+Enter job id: b
+Enter deadline: 1
+Enter profit: 19
+Enter job id: c
+Enter deadline: 2
+Enter profit: 27
+Enter job id: d
+Enter deadline: 1
+Enter profit: 25
+Enter job id: e
+Enter deadline: 3
+Enter profit: 15
+
+Selected jobs sequence:
+c a e
+
 
