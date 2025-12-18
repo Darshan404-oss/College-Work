@@ -1,1 +1,40 @@
+//Write a Java program to reverse a number using recursion.
+
+import java.util.Scanner;
+
+public class ReverseNumber {
+
+    static int reverse = 0;
+
+    // recursive function to reverse number
+    static void reverseNumber(int n) {
+
+        if (n == 0) {
+            return;
+        }
+
+        reverse = reverse * 10 + (n % 10);
+        reverseNumber(n / 10);
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int num;
+
+        System.out.print("Enter a number: ");
+        num = sc.nextInt();
+
+        reverseNumber(num);
+
+        System.out.println("Reversed number: " + reverse);
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter a number: 1234
+Reversed number: 4321
 
