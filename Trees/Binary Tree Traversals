@@ -1,1 +1,75 @@
+//Write a Java program to perform Binary Tree Traversals (Inorder, Preorder and Postorder).
+
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class BinaryTreeTraversal {
+
+    Node root = null;
+
+    // create tree manually
+    void createTree() {
+        root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+    }
+
+    // Inorder Traversal
+    void inorder(Node root) {
+        if (root != null) {
+            inorder(root.left);
+            System.out.print(root.data + " ");
+            inorder(root.right);
+        }
+    }
+
+    // Preorder Traversal
+    void preorder(Node root) {
+        if (root != null) {
+            System.out.print(root.data + " ");
+            preorder(root.left);
+            preorder(root.right);
+        }
+    }
+
+    // Postorder Traversal
+    void postorder(Node root) {
+        if (root != null) {
+            postorder(root.left);
+            postorder(root.right);
+            System.out.print(root.data + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+
+        BinaryTreeTraversal bt = new BinaryTreeTraversal();
+        bt.createTree();
+
+        System.out.print("Inorder Traversal: ");
+        bt.inorder(bt.root);
+
+        System.out.print("\nPreorder Traversal: ");
+        bt.preorder(bt.root);
+
+        System.out.print("\nPostorder Traversal: ");
+        bt.postorder(bt.root);
+    }
+}
+
+//Output:
+Inorder Traversal: 4 2 5 1 3
+Preorder Traversal: 1 2 4 5 3
+Postorder Traversal: 4 5 2 3 1
 
