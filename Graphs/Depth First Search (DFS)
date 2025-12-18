@@ -1,1 +1,66 @@
+//Write a Java program to perform Depth First Search (DFS) on a graph.
+
+import java.util.Scanner;
+
+public class DFS {
+
+    int[][] adj;
+    int[] visited;
+    int n;
+
+    DFS(int n) {
+        this.n = n;
+        adj = new int[n][n];
+        visited = new int[n];
+    }
+
+    // DFS traversal using recursion
+    void dfs(int vertex) {
+
+        visited[vertex] = 1;
+        System.out.print(vertex + " ");
+
+        for (int i = 0; i < n; i++) {
+            if (adj[vertex][i] == 1 && visited[i] == 0) {
+                dfs(i);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of vertices: ");
+        int n = sc.nextInt();
+
+        DFS graph = new DFS(n);
+
+        System.out.println("Enter adjacency matrix:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                graph.adj[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.print("Enter starting vertex: ");
+        int start = sc.nextInt();
+
+        System.out.print("DFS Traversal: ");
+        graph.dfs(start);
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter number of vertices: 4
+Enter adjacency matrix:
+0 1 1 0
+1 0 0 1
+1 0 0 1
+0 1 1 0
+Enter starting vertex: 0
+
+DFS Traversal: 0 1 3 2
 
