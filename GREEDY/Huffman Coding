@@ -1,1 +1,104 @@
+//Write a Java program to implement Huffman Coding using Greedy method.
+
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+// class for Huffman tree node
+class HuffmanNode {
+    char ch;
+    int freq;
+    HuffmanNode left;
+    HuffmanNode right;
+}
+
+public class HuffmanCoding {
+
+    // function to print Huffman codes
+    static void printCode(HuffmanNode root, String code) {
+
+        if (root == null) {
+            return;
+        }
+
+        // if leaf node
+        if (root.left == null && root.right == null) {
+            System.out.println(root.ch + " : " + code);
+            return;
+        }
+
+        printCode(root.left, code + "0");
+        printCode(root.right, code + "1");
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n;
+
+        System.out.print("Enter number of characters: ");
+        n = sc.nextInt();
+
+        char[] chars = new char[n];
+        int[] freq = new int[n];
+
+        System.out.println("Enter characters:");
+        for (int i = 0; i < n; i++) {
+            chars[i] = sc.next().charAt(0);
+        }
+
+        System.out.println("Enter frequencies:");
+        for (int i = 0; i < n; i++) {
+            freq[i] = sc.nextInt();
+        }
+
+        // priority queue based on frequency
+        PriorityQueue<HuffmanNode> pq =
+                new PriorityQueue<>((a, b) -> a.freq - b.freq);
+
+        for (int i = 0; i < n; i++) {
+            HuffmanNode node = new HuffmanNode();
+            node.ch = chars[i];
+            node.freq = freq[i];
+            node.left = null;
+            node.right = null;
+            pq.add(node);
+        }
+
+        // build Huffman tree
+        while (pq.size() > 1) {
+
+            HuffmanNode x = pq.poll();
+            HuffmanNode y = pq.poll();
+
+            HuffmanNode sum = new HuffmanNode();
+            sum.ch = '-';
+            sum.freq = x.freq + y.freq;
+            sum.left = x;
+            sum.right = y;
+
+            pq.add(sum);
+        }
+
+        HuffmanNode root = pq.peek();
+
+        System.out.println("Huffman Codes:");
+        printCode(root, "");
+
+        sc.close();
+    }
+}
+
+//Output:
+Enter number of characters: 4
+Enter characters:
+a b c d
+Enter frequencies:
+5 9 12 13
+
+Huffman Codes:
+c : 00
+d : 01
+a : 10
+b : 11
 
