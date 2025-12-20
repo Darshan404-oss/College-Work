@@ -1,28 +1,28 @@
-# Data Structures and Algorithms – College Practical
+# Data Structures and Algorithms (Java)
 
-This repository contains **Java programs for Data Structures and Algorithms**  
-developed as part of my **college practical work**.
+This repository contains **Java implementations of core Data Structures and Algorithms**  
+created for **academic learning and placement preparation**.
 
-All programs are written in a **simple and clear manner** following the  
-**academic syllabus** and are suitable for **practical exams and viva**.
+The programs are written in a **simple and clean manner**, focusing on logic clarity  
+and fundamental understanding.
 
 ## Topics Covered
-- Searching Algorithms
-- Sorting Algorithms
-- Recursion
-- Stack and Queue
-- Linked Lists
-- Trees
-- Graph Algorithms
-- Greedy Algorithms
+- Searching Algorithms  
+- Sorting Algorithms  
+- Recursion  
+- Stack and Queue  
+- Linked Lists  
+- Trees  
+- Graph Algorithms  
+- Greedy Algorithms  
 
 ## Language Used
 - Java
 
 ## Purpose
-This repository is created **for academic and learning purposes **.
+This repository is maintained for **learning, revision, and interview preparation**.
 
 ## Author
-Name: _Darshan Tonape_  
-Course: _Data Structure and Algorithm_  
-College: _N.B.Navale Sinhgad College of Engineering_
+**Darshan Tonape**  
+Computer Science Student  
+N. B. Navale Sinhgad College of Engineering
